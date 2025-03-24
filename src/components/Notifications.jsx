@@ -1,58 +1,26 @@
-import { Link } from "react-router-dom";
-import {
-  FaWallet, FaMoneyBillWave, FaQrcode, 
-  FaCreditCard, FaFileInvoice, FaChartPie, 
-  FaBell, FaUserShield 
-} from "react-icons/fa";
+import { useState } from "react";
+import "../styles/Notification.css";
 
-function Dashboard() {
+function Notifications() {
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: "Payment of ₹5000 received.", type: "success", time: "2h ago" },
+    { id: 2, message: "Your withdrawal request is pending.", type: "warning", time: "5h ago" },
+    { id: 3, message: "Transaction of ₹10000 failed.", type: "error", time: "1d ago" },
+  ]);
+
   return (
-    <div className="dashboard-container">
-      <h2>Welcome to Your Dashboard</h2>
-
-      <div className="dashboard-links">
-        <Link to="/wallet" className="dashboard-item">
-          <FaWallet className="icon" />
-          <p>My Wallet</p>
-        </Link>
-
-        <Link to="/wallet#send-money" className="dashboard-item">
-          <FaMoneyBillWave className="icon" />
-          <p>Send Money</p>
-        </Link>
-
-        <Link to="/wallet#merchant-payment" className="dashboard-item">
-          <FaCreditCard className="icon" />
-          <p>Merchant Payment</p>
-        </Link>
-
-        <Link to="/wallet#qr-payment" className="dashboard-item">
-          <FaQrcode className="icon" />
-          <p>QR Payments</p>
-        </Link>
-
-        <Link to="/wallet#bill-payment" className="dashboard-item">
-          <FaFileInvoice className="icon" />
-          <p>Bill Payments</p>
-        </Link>
-
-        <Link to="/transactions" className="dashboard-item">
-          <FaChartPie className="icon" />
-          <p>Transaction History</p>
-        </Link>
-
-        <Link to="/notifications" className="dashboard-item">
-          <FaBell className="icon" />
-          <p>Notifications</p>
-        </Link>
-
-        <Link to="/admin-panel" className="dashboard-item">
-          <FaUserShield className="icon" />
-          <p>Admin Panel</p>
-        </Link>
-      </div>
+    <div className="notifications">
+      <h2>Notifications</h2>
+      <ul>
+        {notifications.map(notif => (
+          <li key={notif.id} className={notif.type}>
+            <span>{notif.message}</span>
+            <small>{notif.time}</small>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default Dashboard;
+export default Notifications;
